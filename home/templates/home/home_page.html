@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+    {# This select is necessary to change the language of the page #}
+    {# See the Ajax method on base.html (line 35) #}
+    <label for="language_chooser">Select the language:</label>
+    <select id="language_chooser">
+      <option value="en">English</option>
+      <option value="fr">François</option>
+      <option value="es">Espanhol</option>
+    </select>
+
+    {# to access the fields you access the fields you have declare on TranslatedField's in the models.py #}
+    <h1>{{ page.translated_title }}</h1>
+    <p>{{ page.body }}</p>
+
+    {% if self.get_children %}
+        <h3>Posts</h3>
+        {% for child_page in self.get_children %}
+            <a href="{{child_page.url}}">{{child_page.title}}</a>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
